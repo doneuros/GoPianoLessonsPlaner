@@ -18,7 +18,7 @@ func main(){
             }
             fmt.Println()
         }
-        writeData(records, "result.csv")
+        //writeData(records, "result.csv")
         createMonthFile(0, 24*4)
 
 }
@@ -58,9 +58,11 @@ func createMonthFile(start int, end int) {
 
                 }
         }
+        //For Debug
         for _, value := range data {
                 fmt.Print(value)
         }
+        writeData(data, currentMonth+":"+currentYear+".csv")
 
 
 
