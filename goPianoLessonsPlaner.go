@@ -54,7 +54,10 @@ func createMonthFile(start int, end int) {
         for _, value := range data {
                 fmt.Print(value)
         }
-        writeData(data, currentMonth.String()+":"+currentYear.String()+".csv")
+
+
+        writeData(data, currentMonth.String()+"_"+strconv.Itoa(currentYear)+".csv")
+
 
 
 }
