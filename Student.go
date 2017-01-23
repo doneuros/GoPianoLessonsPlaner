@@ -24,6 +24,7 @@ func createStudentTemplate()  {
 func getStudent(id int) (Student, error) {
 	stuArray := getStudents(getStudentFileName())
 	for _, stu := range stuArray {
+		fmt.Println(stu.name)
 		if stu.id == id {
 			return stu, nil
 		}
@@ -34,6 +35,7 @@ func getStudent(id int) (Student, error) {
 func getStudentId(name string) int {
 	stuArray := getStudents(getStudentFileName())
 	for _, stu := range stuArray {
+		fmt.Println(stu.name)
 		if stu.name == name {
 			return stu.id
 		}
@@ -50,9 +52,10 @@ func getStudents(filePath string) []Student {
 	studArray := make([]Student,len(records))
 	for i, stu := range records {
 		if(len(stu)!=2){
-			fmt.Println("Not Correct users")
+			//fmt.Println("Not Correct users")
 		} else {
 			id, _ := strconv.Atoi(stu[0])
+			fmt.Println(id)
 			studArray[i] = Student{id, stu[1]}
 		}
 	}
