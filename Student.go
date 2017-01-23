@@ -5,6 +5,7 @@ import(
 	"encoding/csv"
 	"fmt"
 	"errors"
+	"strconv"
 )
 
 type Student struct {
@@ -16,7 +17,7 @@ func getStudentFileName() string {
 	return "students.csv"
 }
 func createStudentTemplate()  {
-	data := [4][2]string{{"1","Test1"},{"2","Test2"},{"3","Test3"},{"4","Test4"}}
+	data := [][]string{{"1","Test1"},{"2","Test2"},{"3","Test3"},{"4","Test4"}}
 	writeData(data, getStudentFileName())
 }
 
