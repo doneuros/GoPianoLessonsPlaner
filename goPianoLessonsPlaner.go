@@ -54,7 +54,7 @@ func createMonthFile(start int, end int) {
         for _, value := range data {
                 fmt.Print(value)
         }
-        writeData(data, string(currentMonth)+":"+string(currentYear)+".csv")
+        writeData(data, currentMonth.String()+":"+currentYear.String()+".csv")
 
 
 }
@@ -76,6 +76,9 @@ func readFile(filePath string) [][]string {
 }
 
 func writeData(data [][]string, fileName string) {
+        if(fileExists(fileName)){
+                return 
+        }
         file, err := os.Create(fileName)
         checkError("Cannot create file", err)
         defer file.Close()
@@ -88,6 +91,11 @@ func writeData(data [][]string, fileName string) {
         }
 
         defer writer.Flush()
+}
+
+func fileExists(name string) bool {
+        _, err := os.Stat(name)
+        return !os.IsNotExist(err)
 }
 
 func checkError(message string, err error) {
