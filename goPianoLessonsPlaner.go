@@ -11,6 +11,8 @@ import(
 
 
 func main(){
+        createStudentTemplate()
+        fmt.println(getStudent(1))
         createMonthFile(0, 24*4)
 
 }
@@ -61,6 +63,8 @@ func createMonthFile(start int, end int) {
 
 
 }
+
+
 
 func readFile(filePath string) [][]string {
         csvfile1, err := os.Open(filePath)
