@@ -4,6 +4,7 @@ import(
 	"os"
 	"encoding/csv"
 	"fmt"
+	"errors"
 )
 
 type Student struct {
@@ -18,24 +19,24 @@ func createStudentTemplate()  {
 	writeData([4][2]string{{"1","Test1"},{"2","Test2"},{"3","Test3"},{"4","Test4"}}, getStudentFileName())
 }
 
-func getStudent(id long) Student {
+func getStudent(id int) (Student, error) {
 	stuArray := getStudents(getStudentFileName())
 	for _, stu := range stuArray {
 		if stu.id == id {
 			return stu
 		}
 	}
-	return _
+	return Student{}, errors.New("Error")
 }
 
 func getStudentId(name string) int {
 	stuArray := getStudents(getStudentFileName())
 	for _, stu := range stuArray {
 		if stu.name == name {
-			return stu
+			return stu.id
 		}
 	}
-	return _
+	return -1
 }
 
 func getStudents(filePath string) []Student {
