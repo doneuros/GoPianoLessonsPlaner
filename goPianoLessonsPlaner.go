@@ -11,14 +11,6 @@ import(
 
 
 func main(){
-        records := readFile("test.csv")
-        for _, h := range records {
-           for _, cell := range h {
-                fmt.Print(cell, " ")
-            }
-            fmt.Println()
-        }
-        //writeData(records, "result.csv")
         createMonthFile(0, 24*4)
 
 }
@@ -62,7 +54,7 @@ func createMonthFile(start int, end int) {
         for _, value := range data {
                 fmt.Print(value)
         }
-        writeData(data, currentMonth+":"+currentYear+".csv")
+        writeData(data, string(currentMonth)+":"+string(currentYear)+".csv")
 
 
 
