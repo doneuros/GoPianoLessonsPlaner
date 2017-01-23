@@ -12,7 +12,7 @@ import(
 
 func main(){
         createStudentTemplate()
-        fmt.println(getStudent(1))
+        fmt.Println(getStudent(1))
         createMonthFile(0, 24*4)
 
 }

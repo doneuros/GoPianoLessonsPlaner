@@ -7,7 +7,7 @@ import(
 )
 
 type Student struct {
-	id long
+	id int
 	name string
 
 }
