@@ -41,7 +41,7 @@ func createMonthFile(start int, end int) {
                 }
 
 
-                for j :=start+1; j<end+1; j++ {
+                for j :=start+1; j<end; j++ {
                         if i==start {
                                 data[i][j] = strconv.Itoa((j)/4)+":"+strconv.Itoa(((j)%4)*15)
                         } else {
@@ -54,13 +54,7 @@ func createMonthFile(start int, end int) {
         for _, value := range data {
                 fmt.Print(value)
         }
-<<<<<<< HEAD
-        writeData(data, string(currentMonth)+":"+currentYear+".csv")
-=======
         writeData(data, string(currentMonth)+":"+string(currentYear)+".csv")
->>>>>>> 1180a50cf509da147fbf05d427e4bfa40956bcfe
-
-
 
 
 }
