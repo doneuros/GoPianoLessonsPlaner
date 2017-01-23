@@ -15,7 +15,7 @@ func getStudentFileName() string {
 	return "students.csv"
 }
 func createStudentTemplate()  {
-	writeData([...][...]string{{"1","Test1"},{"2","Test2"},{"3","Test3"},{"4","Test4"}}, getStudentFileName())
+	writeData([4][2]string{{"1","Test1"},{"2","Test2"},{"3","Test3"},{"4","Test4"}}, getStudentFileName())
 }
 
 func getStudent(id long) Student {
@@ -25,17 +25,17 @@ func getStudent(id long) Student {
 			return stu
 		}
 	}
-	return nil
+	return _
 }
 
-func getStudentId(String name) long {
+func getStudentId(name string) int {
 	stuArray := getStudents(getStudentFileName())
 	for _, stu := range stuArray {
 		if stu.name == name {
 			return stu
 		}
 	}
-	return nil
+	return _
 }
 
 func getStudents(filePath string) []Student {
