@@ -16,14 +16,15 @@ func getStudentFileName() string {
 	return "students.csv"
 }
 func createStudentTemplate()  {
-	writeData([4][2]string{{"1","Test1"},{"2","Test2"},{"3","Test3"},{"4","Test4"}}, getStudentFileName())
+	data := [4][2]string{{"1","Test1"},{"2","Test2"},{"3","Test3"},{"4","Test4"}}
+	writeData(data, getStudentFileName())
 }
 
 func getStudent(id int) (Student, error) {
 	stuArray := getStudents(getStudentFileName())
 	for _, stu := range stuArray {
 		if stu.id == id {
-			return stu
+			return stu, nil
 		}
 	}
 	return Student{}, errors.New("Error")
@@ -50,7 +51,8 @@ func getStudents(filePath string) []Student {
 		if(len(stu)!=2){
 			fmt.Println("Not Correct users")
 		} else {
-			studArray[i] = Student{stu[0], stu[1]}
+			id, _ := strconv.Atoi(stu[0])
+			studArray[i] = Student{id, stu[1]}
 		}
 	}
 
