@@ -3,7 +3,6 @@ package main
 import(
 	"os"
 	"encoding/csv"
-	"fmt"
 	"errors"
 	"strconv"
 )
@@ -24,7 +23,6 @@ func createStudentTemplate()  {
 func getStudent(id int) (Student, error) {
 	stuArray := getStudents(getStudentFileName())
 	for _, stu := range stuArray {
-		fmt.Println(stu.name)
 		if stu.id == id {
 			return stu, nil
 		}
@@ -35,7 +33,6 @@ func getStudent(id int) (Student, error) {
 func getStudentId(name string) int {
 	stuArray := getStudents(getStudentFileName())
 	for _, stu := range stuArray {
-		fmt.Println(stu.name)
 		if stu.name == name {
 			return stu.id
 		}
@@ -47,7 +44,7 @@ func getStudents(filePath string) []Student {
 	csvfile1, _ := os.Open(filePath)
 	defer csvfile1.Close()
 	r := csv.NewReader(csvfile1)
-	r.Comma = ';'
+	r.Comma = ','
 	records,_ := r.ReadAll()
 	studArray := make([]Student,len(records))
 	for i, stu := range records {
@@ -55,7 +52,6 @@ func getStudents(filePath string) []Student {
 			//fmt.Println("Not Correct users")
 		} else {
 			id, _ := strconv.Atoi(stu[0])
-			fmt.Println(id)
 			studArray[i] = Student{id, stu[1]}
 		}
 	}
