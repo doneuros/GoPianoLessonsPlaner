@@ -31,11 +31,13 @@ func lessonOccur() {
                         fmt.Scanln(&input)
                         if(input == "Nein" || input == "N" || input == "No"){
                                 fmt.Println("Ist die Stunde dauerhaft verschoben? (Ja/Y/Yes oder Nein/N/No)")
+	 			fmt.Scanln(&input)
+
                                 if(input == "Ja" || input == "Y" || input == "Yes"){
                                         fmt.Println("Stunde eintrage: ")
                                         fmt.Scanln(&input)
-		//			hour, _ := strconv.Atoi(input)
-                //                        students[i].appointmentHour = hour
+					hour, _ := strconv.Atoi(input)
+                                        students[i].appointmentHour = hour
                                         fmt.Println("Minute eintrage: ")
                                         fmt.Scanln(&input)
 					minutes, _ := strconv.Atoi(input)

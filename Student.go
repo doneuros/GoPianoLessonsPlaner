@@ -34,13 +34,13 @@ func getStudent(id int) (Student, error) {
 }
 
 func writeStudents(students []Student){
-	data := make([]string,len(stu))
+	data := make([][]string,len(students))
 	for i,stu := range students {
-		id, _ := strconv.Itoa(stu.id)
-		appointmentHour, _ := strconv.Itoa(stu.appointmentHour)
-		appointmentMinutes, _ := strconv.Itoa(stu.appointmentMinutes)
-		appointmentDay, _ := strconv.Itoa(stu.appointmentDay)
-		data[i] = id+","+stu.name+","+appointmentHour+","+appointmentMinutes+","+appointmentDay
+		id := strconv.Itoa(stu.id)
+		appointmentHour := strconv.Itoa(stu.appointmentHour)
+		appointmentMinutes := strconv.Itoa(stu.appointmentMinutes)
+		appointmentDay := strconv.Itoa(stu.appointmentDay)
+		data[i] = []string{id,stu.name,appointmentHour,appointmentMinutes,appointmentDay}
 
 	}
 	writeData(data, getStudentFileName())
