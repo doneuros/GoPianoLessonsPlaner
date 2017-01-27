@@ -21,7 +21,7 @@ func lessonOccur() {
         month := "January"
         students := getStudentsArray()
         data := readFile(month+"_2017.csv")
-        for _, stu := range students {
+        for i, stu := range students {
                 fmt.Println("Hat die Stunde von %s stattgefunden, (Ja/Y/Yes oder Nein/N/No)", stu.name)
                 var input string
                 fmt.Scanln(&input)
@@ -34,13 +34,16 @@ func lessonOccur() {
                                 if(input == "Ja" || input == "Y" || input == "Yes"){
                                         fmt.Println("Stunde eintrage: ")
                                         fmt.Scanln(&input)
-                                        stu.appointmentHour = strconv.Atoi(input)
+		//			hour, _ := strconv.Atoi(input)
+                //                        students[i].appointmentHour = hour
                                         fmt.Println("Minute eintrage: ")
                                         fmt.Scanln(&input)
-                                        stu.appointmentMinutes = strconv.Atoi(input)
+					minutes, _ := strconv.Atoi(input)
+                                        students[i].appointmentMinutes = minutes
                                         fmt.Println("Tag eintrage: ")
                                         fmt.Scanln(&input)
-                                        stu.appointmentDay = strconv.Atoi(input)
+					day, _ := strconv.Atoi(input)
+                                        students[i].appointmentDay = day
                                         //data[stu.appointmentDay][stu.appointmentHour*4+stu.appointmentMinutes/15]
                                 }
                         } else {
@@ -114,11 +117,7 @@ func readFile(filePath string) [][]string {
         defer csvfile1.Close()
 
         r := csv.NewReader(csvfile1)
-<<<<<<< HEAD
         //r.Comma = ','
-=======
-        r.Comma = ','
->>>>>>> 19aedaab46488c3c6e4d82f8840fe29a698e07ab
         records,err := r.ReadAll()
         if err !=nil {
                 log.Fatal(err)
