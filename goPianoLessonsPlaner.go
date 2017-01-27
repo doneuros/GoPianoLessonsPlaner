@@ -32,7 +32,15 @@ func lessonOccur() [][] string {
                         if(input == "Nein" || input == "N" || input == "No"){
                                 fmt.Println("Ist die Stunde dauerhaft verschoben? (Ja/Y/Yes oder Nein/N/No)")
                                 if(input == "Ja" || input == "Y" || input == "Yes"){
-                                        fmt.Println("TODO neuen Termin abfrage und eintragen")
+                                        fmt.Println("Stunde eintrage: ")
+                                        fmt.Scanln(&input)
+                                        stu.appointmentHour = strconv.Atoi(input)
+                                        fmt.Println("Minute eintrage: ")
+                                        fmt.Scanln(&input)
+                                        stu.appointmentMinutes = strconv.Atoi(input)
+                                        fmt.Println("Tag eintrage: ")
+                                        fmt.Scanln(&input)
+                                        stu.appointmentDay = strconv.Atoi(input)
                                         //data[stu.appointmentDay][stu.appointmentHour*4+stu.appointmentMinutes/15]
                                 }
                         } else {
@@ -41,6 +49,7 @@ func lessonOccur() [][] string {
                 }
 
         }
+        writeStudents(students)
 
 }
 
@@ -101,7 +110,7 @@ func readFile(filePath string) [][]string {
         defer csvfile1.Close()
 
         r := csv.NewReader(csvfile1)
-        r.Comma = ';'
+        //r.Comma = ','
         records,err := r.ReadAll()
         if err !=nil {
                 log.Fatal(err)
