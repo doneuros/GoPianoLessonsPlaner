@@ -13,20 +13,20 @@ import(
 func main(){
         createStudentTemplate()
         lessonOccur()
-        createMonthFile(0, 24*4)
+        //createMonthFile(0, 24*4)
 
 }
 
-func lessonOccur() [][] string {
+func lessonOccur() {
         month := "January"
         students := getStudentsArray()
+        data := readFile(month+"_2017.csv")
         for _, stu := range students {
                 fmt.Println("Hat die Stunde von %s stattgefunden, (Ja/Y/Yes oder Nein/N/No)", stu.name)
                 var input string
                 fmt.Scanln(&input)
                 if(input == "Ja" || input == "Y" || input == "Yes"){
                         fmt.Print("Write to file lesson taken")
-                        data := readFile(month+"_2017.csv")
                         fmt.Println("Hat die Stunde am %d. %s um %d:%d Uhr stattgefunden? (Ja/Y/Yes oder Nein/N/No)", stu.appointmentDay, month, stu.appointmentHour, stu.appointmentMinutes)
                         fmt.Scanln(&input)
                         if(input == "Nein" || input == "N" || input == "No"){
@@ -36,11 +36,13 @@ func lessonOccur() [][] string {
                                         //data[stu.appointmentDay][stu.appointmentHour*4+stu.appointmentMinutes/15]
                                 }
                         } else {
-                                data[stu.appointmentDay][stu.appointmentHour*4+stu.appointmentMinutes/15]
+                                data[stu.appointmentDay][stu.appointmentHour*4+stu.appointmentMinutes/15] = "1"
                         }
                 }
 
         }
+	writeData(data,month+"_2017.csv")
+
 
 }
 
@@ -83,6 +85,9 @@ func createMonthFile(start int, end int) {
         for _, value := range data {
                 fmt.Print(value)
         }
+	if(fileExists(currentMonth.String()+"_"+strconv.Itoa(currentYear)+".csv")){
+                return
+        }
 
 
         writeData(data, currentMonth.String()+"_"+strconv.Itoa(currentYear)+".csv")
@@ -101,7 +106,7 @@ func readFile(filePath string) [][]string {
         defer csvfile1.Close()
 
         r := csv.NewReader(csvfile1)
-        r.Comma = ';'
+        r.Comma = ','
         records,err := r.ReadAll()
         if err !=nil {
                 log.Fatal(err)
@@ -110,9 +115,6 @@ func readFile(filePath string) [][]string {
 }
 
 func writeData(data [][]string, fileName string) {
-        if(fileExists(fileName)){
-                return 
-        }
         file, err := os.Create(fileName)
         checkError("Cannot create file", err)
         defer file.Close()
