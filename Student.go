@@ -11,13 +11,16 @@ import(
 type Student struct {
 	id int
 	name string
+	appointmentHour int
+	appointmentMinutes int
+	appointmentDay int
 
 }
 func getStudentFileName() string {
 	return "students.csv"
 }
 func createStudentTemplate()  {
-	data := [][]string{{"1","Test1"},{"2","Test2"},{"3","Test3"},{"4","Test4"}}
+	data := [][]string{{"1","Test1","14","30","1"},{"2","Test2","15","00","5"},{"3","Test3","16","30","4"},{"4","Test4","17","45","1"}}
 	writeData(data, getStudentFileName())
 }
 
@@ -43,6 +46,10 @@ func getStudentId(name string) int {
 	return -1
 }
 
+func getStudentsArray() []Student {
+	return getStudents(getStudentFileName())
+}
+
 func getStudents(filePath string) []Student {
 	csvfile1, _ := os.Open(filePath)
 	defer csvfile1.Close()
@@ -51,12 +58,15 @@ func getStudents(filePath string) []Student {
 	records,_ := r.ReadAll()
 	studArray := make([]Student,len(records))
 	for i, stu := range records {
-		if(len(stu)!=2){
+		if(len(stu)!=5){
 			//fmt.Println("Not Correct users")
 		} else {
 			id, _ := strconv.Atoi(stu[0])
-			fmt.Println(id)
-			studArray[i] = Student{id, stu[1]}
+			appointmentHour, _ := strconv.Atoi(stu[2])
+			appointmentMinutes, _ := strconv.Atoi(stu[3])
+			appointmentDay, _ := strconv.Atoi(stu[4])
+			//fmt.Println(id)
+			studArray[i] = Student{id, stu[1], appointmentHour, appointmentMinutes, appointmentDay}
 		}
 	}
 

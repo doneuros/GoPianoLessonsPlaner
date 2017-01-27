@@ -12,8 +12,35 @@ import(
 
 func main(){
         createStudentTemplate()
-        fmt.Println(getStudent(1))
+        lessonOccur()
         createMonthFile(0, 24*4)
+
+}
+
+func lessonOccur() [][] string {
+        month := "January"
+        students := getStudentsArray()
+        for _, stu := range students {
+                fmt.Println("Hat die Stunde von %s stattgefunden, (Ja/Y/Yes oder Nein/N/No)", stu.name)
+                var input string
+                fmt.Scanln(&input)
+                if(input == "Ja" || input == "Y" || input == "Yes"){
+                        fmt.Print("Write to file lesson taken")
+                        data := readFile(month+"_2017.csv")
+                        fmt.Println("Hat die Stunde am %d. %s um %d:%d Uhr stattgefunden? (Ja/Y/Yes oder Nein/N/No)", stu.appointmentDay, month, stu.appointmentHour, stu.appointmentMinutes)
+                        fmt.Scanln(&input)
+                        if(input == "Nein" || input == "N" || input == "No"){
+                                fmt.Println("Ist die Stunde dauerhaft verschoben? (Ja/Y/Yes oder Nein/N/No)")
+                                if(input == "Ja" || input == "Y" || input == "Yes"){
+                                        fmt.Println("TODO neuen Termin abfrage und eintragen")
+                                        //data[stu.appointmentDay][stu.appointmentHour*4+stu.appointmentMinutes/15]
+                                }
+                        } else {
+                                data[stu.appointmentDay][stu.appointmentHour*4+stu.appointmentMinutes/15]
+                        }
+                }
+
+        }
 
 }
 
