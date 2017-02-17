@@ -12,22 +12,42 @@ import(
 
 func main(){
         createStudentTemplate()
-        lessonOccur()
+        month := "January"
+        year := "2017"
+        lessonOccur(month, year)
         //createMonthFile(0, 24*4)
 
 }
 
-func lessonOccur() {
-        month := "January"
+func getDayOfMonth(month int, year int) int {
+        now := time.Now()
+        currentLocation := now.Location()
+        firstOfMonth := time.Date(year, month, 1, 0, 0, 0, 0, currentLocation)
+        lastOfMonth := firstOfMonth.AddDate(0, 1, -1)
+        return lastOfMonth.Day();
+}
+
+func lessonOccur(month Month, year Year){
+        monthLength := getDayOfMonth(month, year);
+        for i:=0; i<4;i++  {
+                lessonOccurWeek(i, month, year, monthLength);
+        }
+}
+
+func lessonOccurWeek(week int, month string, year string, monthLenght int) {
+        fmt.Printlf("Eingabe für %d. Teil im %s", week, month)
         students := getStudentsArray()
-        data := readFile(month+"_2017.csv")
+        data := readFile(month+"_"+year+".csv")
         for i, stu := range students {
-                fmt.Println("Hat die Stunde von %s stattgefunden, (Ja/Y/Yes oder Nein/N/No)", stu.name)
+                if(stu.appointmentDay+week*7>monthLenght){
+                        continue;
+                }
+                fmt.Printlf("Hat die Stunde von %s am %d stattgefunden, (Ja/Y/Yes oder Nein/N/No)", stu.name, stu.appointmentDay+week*7)
                 var input string
                 fmt.Scanln(&input)
                 if(input == "Ja" || input == "Y" || input == "Yes"){
                         fmt.Print("Write to file lesson taken")
-                        fmt.Println("Hat die Stunde am %d. %s um %d:%d Uhr stattgefunden? (Ja/Y/Yes oder Nein/N/No)", stu.appointmentDay, month, stu.appointmentHour, stu.appointmentMinutes)
+                        fmt.Printlf("Hat die Stunde am %d. %s um %d:%d Uhr stattgefunden? (Ja/Y/Yes oder Nein/N/No)", stu.appointmentDay, month, stu.appointmentHour, stu.appointmentMinutes)
                         fmt.Scanln(&input)
                         if(input == "Nein" || input == "N" || input == "No"){
                                 fmt.Println("Ist die Stunde dauerhaft verschoben? (Ja/Y/Yes oder Nein/N/No)")
@@ -36,11 +56,11 @@ func lessonOccur() {
                                         fmt.Scanln(&input)
 		//			hour, _ := strconv.Atoi(input)
                 //                        students[i].appointmentHour = hour
-                                        fmt.Println("Minute eintrage: ")
+                                        fmt.Println("Minute eintragen: ")
                                         fmt.Scanln(&input)
 					minutes, _ := strconv.Atoi(input)
                                         students[i].appointmentMinutes = minutes
-                                        fmt.Println("Tag eintrage: ")
+                                        fmt.Println("Tag eintragen: ")
                                         fmt.Scanln(&input)
 					day, _ := strconv.Atoi(input)
                                         students[i].appointmentDay = day
