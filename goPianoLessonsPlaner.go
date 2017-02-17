@@ -51,12 +51,20 @@ func lessonOccurWeek(week int, month string, year string, monthLenght int) {
                         fmt.Scanln(&input)
                         if(input == "Nein" || input == "N" || input == "No"){
                                 fmt.Println("Ist die Stunde dauerhaft verschoben? (Ja/Y/Yes oder Nein/N/No)")
+	 			fmt.Scanln(&input)
+
                                 if(input == "Ja" || input == "Y" || input == "Yes"){
                                         fmt.Println("Stunde eintrage: ")
                                         fmt.Scanln(&input)
+<<<<<<< HEAD
 		//			hour, _ := strconv.Atoi(input)
                 //                        students[i].appointmentHour = hour
                                         fmt.Println("Minute eintragen: ")
+=======
+					hour, _ := strconv.Atoi(input)
+                                        students[i].appointmentHour = hour
+                                        fmt.Println("Minute eintrage: ")
+>>>>>>> 15f9362bb7934b76fab726178de7cdfc8258c78e
                                         fmt.Scanln(&input)
 					minutes, _ := strconv.Atoi(input)
                                         students[i].appointmentMinutes = minutes
